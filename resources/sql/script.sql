@@ -1,4 +1,4 @@
-CREATE TABLE `users` (
+CREATE TABLE `USERS` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`email` varchar(255) NOT NULL UNIQUE,
 	`admin` BOOLEAN NOT NULL DEFAULT false,
@@ -9,14 +9,14 @@ CREATE TABLE `users` (
 	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `subscriptions` (
+CREATE TABLE `SUBSCRIPTIONS` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`user_id` INT NOT NULL,
 	`theme_id` INT NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `posts` (
+CREATE TABLE `POSTS` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`theme_id` INT NOT NULL,
 	`user_id` INT NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE `posts` (
 	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `themes` (
+CREATE TABLE `THEMES` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`title` varchar(255) NOT NULL UNIQUE,
 	`created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -35,7 +35,7 @@ CREATE TABLE `themes` (
 	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `comments` (
+CREATE TABLE `COMMENTS` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`user_id` INT NOT NULL,
 	`post_id` INT NOT NULL,
@@ -45,29 +45,29 @@ CREATE TABLE `comments` (
 	PRIMARY KEY (`id`)
 );
 
-ALTER TABLE `subscriptions` ADD CONSTRAINT `subscriptions_fk0` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`);
+ALTER TABLE `SUBSCRIPTIONS` ADD CONSTRAINT `SUBSCRIPTIONS_fk0` FOREIGN KEY (`user_id`) REFERENCES `USERS`(`id`);
 
-ALTER TABLE `subscriptions` ADD CONSTRAINT `subscriptions_fk1` FOREIGN KEY (`theme_id`) REFERENCES `themes`(`id`);
+ALTER TABLE `SUBSCRIPTIONS` ADD CONSTRAINT `SUBSCRIPTIONS_fk1` FOREIGN KEY (`theme_id`) REFERENCES `THEMES`(`id`);
 
-ALTER TABLE `posts` ADD CONSTRAINT `posts_fk0` FOREIGN KEY (`theme_id`) REFERENCES `themes`(`id`);
+ALTER TABLE `POSTS` ADD CONSTRAINT `POSTS_fk0` FOREIGN KEY (`theme_id`) REFERENCES `THEMES`(`id`);
 
-ALTER TABLE `posts` ADD CONSTRAINT `posts_fk1` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`);
+ALTER TABLE `POSTS` ADD CONSTRAINT `POSTS_fk1` FOREIGN KEY (`user_id`) REFERENCES `USERS`(`id`);
 
-ALTER TABLE `comments` ADD CONSTRAINT `comments_fk0` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`);
+ALTER TABLE `COMMENTS` ADD CONSTRAINT `COMMENTS_fk0` FOREIGN KEY (`user_id`) REFERENCES `USERS`(`id`);
 
-ALTER TABLE `comments` ADD CONSTRAINT `comments_fk1` FOREIGN KEY (`post_id`) REFERENCES `posts`(`id`);
+ALTER TABLE `COMMENTS` ADD CONSTRAINT `COMMENTS_fk1` FOREIGN KEY (`post_id`) REFERENCES `POSTS`(`id`);
 
-INSERT INTO users (email, admin, username, password, created_at)
+INSERT INTO USERS (email, admin, username, password, created_at)
 VALUES ('admin@mdd.com', true, 'Admin', '$2a$10$.Hsa/ZjUVaHqi0tp9xieMeewrnZxrZ5pQRzddUXE/WjDu2ZThe6Iq', '2023-09-08 09:53:09');
 
-INSERT INTO themes (title, created_at)
+INSERT INTO THEMES (title, created_at)
 VALUES ('Basket Ball', '2023-09-21 09:53:09');
 
-INSERT INTO posts (theme_id, user_id, title, description, created_at)
+INSERT INTO POSTS (theme_id, user_id, title, description, created_at)
 VALUES (1, 1, 'The amazing Stephen Curry', 'Unstopable shooter description', '2023-09-21 09:53:09');
 
-INSERT INTO subscriptions (theme_id, user_id)
+INSERT INTO SUBSCRIPTIONS (theme_id, user_id)
 VALUES (1, 1);
 
-INSERT INTO comments (user_id, post_id, comment, created_at)
+INSERT INTO COMMENTS (user_id, post_id, comment, created_at)
 VALUES (1, 1, 'Still below Jordan at his prime', '2023-09-21 10:53:09');
