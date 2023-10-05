@@ -1,6 +1,7 @@
 package com.openclassrooms.mdd.mddapp.configuration;
 
 import com.openclassrooms.mdd.mddapp.services.JwtService;
+import com.openclassrooms.mdd.mddapp.services.UserService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
@@ -22,7 +23,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     @Autowired
     private JwtService jwtService;
     @Autowired
-    private UserDetailsService userDetailsService;
+    private UserService userDetailsService;
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {

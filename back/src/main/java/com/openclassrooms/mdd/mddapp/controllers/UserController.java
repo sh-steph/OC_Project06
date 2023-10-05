@@ -3,6 +3,7 @@ package com.openclassrooms.mdd.mddapp.controllers;
 import com.openclassrooms.mdd.mddapp.mapper.UserMapper;
 import com.openclassrooms.mdd.mddapp.models.User;
 import com.openclassrooms.mdd.mddapp.services.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,17 +14,11 @@ import java.util.Objects;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/user")
 public class UserController {
     private final UserMapper userMapper;
     private final UserService userService;
-
-
-    public UserController(UserService userService,
-                          UserMapper userMapper) {
-        this.userMapper = userMapper;
-        this.userService = userService;
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") String id) {
