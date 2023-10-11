@@ -2,7 +2,6 @@ package com.openclassrooms.mdd.mddapp.services;
 
 import com.openclassrooms.mdd.mddapp.models.User;
 import com.openclassrooms.mdd.mddapp.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,7 +21,7 @@ public class UserService implements UserDetailsService {
         return new User(
                 userFind.getId(),
                 userFind.getEmail(),
-                userFind.getUsername(),
+                userFind.getEmail(),
                 userFind.getPassword(),
                 userFind.getAdmin(),
                 userFind.getCreatedAt(),

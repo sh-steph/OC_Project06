@@ -6,8 +6,6 @@ import com.openclassrooms.mdd.mddapp.models.User;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Data
@@ -22,6 +20,14 @@ public class PostRequest {
     private String content;
     @CreatedDate
     private LocalDateTime createdAt;
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MessageResponse {
+        private String message;
+
+    }
 
     @Data
     @NoArgsConstructor
