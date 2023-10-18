@@ -4,10 +4,14 @@ import com.openclassrooms.mdd.mddapp.dto.PostDto;
 import com.openclassrooms.mdd.mddapp.dto.ThemeDto;
 import com.openclassrooms.mdd.mddapp.dto.UserDto;
 import com.openclassrooms.mdd.mddapp.models.Post;
+import com.openclassrooms.mdd.mddapp.models.User;
 import com.openclassrooms.mdd.mddapp.payload.request.PostRequest;
 import com.openclassrooms.mdd.mddapp.services.PostService;
+import com.openclassrooms.mdd.mddapp.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,6 +24,7 @@ import java.time.LocalDateTime;
 public class PostController {
 
     private final PostService postService;
+    private final UserService userService;
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") Long id) {
@@ -62,7 +67,9 @@ public class PostController {
 
     @PostMapping()
     public ResponseEntity<?> addNewPost(@Valid @RequestBody PostDto postDto) {
-        this.postService.addNewPost(postDto);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findByEmail(authentication.getName());
+        this.postService.addNewPost(postDto, user);
         return ResponseEntity.ok().body(new PostRequest.MessageResponse("The post was successfully created"));
     }
 

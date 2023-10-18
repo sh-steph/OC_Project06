@@ -1,25 +1,26 @@
 package com.openclassrooms.mdd.mddapp.payload.request;
 
+import com.openclassrooms.mdd.mddapp.models.Comment;
 import com.openclassrooms.mdd.mddapp.models.Post;
-import com.openclassrooms.mdd.mddapp.models.Theme;
 import com.openclassrooms.mdd.mddapp.models.User;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
-
 import java.time.LocalDateTime;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostRequest {
-
-    private Theme theme;
+public class CommentRequest {
     private User user;
-    private String title;
-    private String content;
+    private Post post;
+    private String comment;
     @CreatedDate
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     @Data
     @NoArgsConstructor
@@ -31,8 +32,7 @@ public class PostRequest {
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class PostsResponse {
-        private Iterable<Post> posts;
+    public static class CommentResponse {
+        private Iterable<Comment> comments;
     }
 }
-

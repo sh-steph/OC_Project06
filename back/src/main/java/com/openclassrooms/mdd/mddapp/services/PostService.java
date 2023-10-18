@@ -2,6 +2,7 @@ package com.openclassrooms.mdd.mddapp.services;
 
 import com.openclassrooms.mdd.mddapp.dto.PostDto;
 import com.openclassrooms.mdd.mddapp.models.Post;
+import com.openclassrooms.mdd.mddapp.models.User;
 import com.openclassrooms.mdd.mddapp.repositories.PostRepository;
 import com.openclassrooms.mdd.mddapp.repositories.ThemeRepository;
 import com.openclassrooms.mdd.mddapp.repositories.UserRepository;
@@ -16,7 +17,6 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final ThemeRepository themeRepository;
-    private final UserRepository userRepository;
 
 
     public Post getPostById(Long id) {
@@ -27,10 +27,10 @@ public class PostService {
         return postRepository.findAll();
     }
 
-    public void addNewPost(PostDto postDto) {
+    public void addNewPost(PostDto postDto, User user) {
         Post post = new Post();
         post.setTheme(themeRepository.getById(postDto.getTheme().getId()));
-        post.setUser(userRepository.getById(postDto.getUser().getId()));
+        post.setUser(user);
         post.setTitle(postDto.getTitle());
         post.setDescription(postDto.getDescription());
         post.setDescription(postDto.getDescription());

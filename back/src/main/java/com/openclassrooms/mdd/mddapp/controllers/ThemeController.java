@@ -35,7 +35,7 @@ public class ThemeController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getAllPosts() {
+    public ResponseEntity<?> getAllThemes() {
         themeService.getAllThemes();
         return ResponseEntity.ok(new ThemeRequest.ThemesResponse(themeService.getAllThemes()));
     }
