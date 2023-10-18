@@ -4,9 +4,11 @@ import com.openclassrooms.mdd.mddapp.dto.PostDto;
 import com.openclassrooms.mdd.mddapp.dto.ThemeDto;
 import com.openclassrooms.mdd.mddapp.dto.UserDto;
 import com.openclassrooms.mdd.mddapp.models.Post;
+import com.openclassrooms.mdd.mddapp.models.Theme;
 import com.openclassrooms.mdd.mddapp.models.User;
 import com.openclassrooms.mdd.mddapp.payload.request.PostRequest;
 import com.openclassrooms.mdd.mddapp.services.PostService;
+import com.openclassrooms.mdd.mddapp.services.ThemeService;
 import com.openclassrooms.mdd.mddapp.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/post")
@@ -25,28 +26,32 @@ public class PostController {
 
     private final PostService postService;
     private final UserService userService;
+    private final ThemeService themeService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable("id") Long id) {
-
+    @GetMapping("/{id}/theme/{themeId}")
+    public ResponseEntity<?> findById(@PathVariable("themeId") Long themeId, @PathVariable("id") Long id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Post post = this.postService.getPostById(Long.valueOf(id));
+        Theme theme = themeService.getThemeById(themeId);
+        User user = userService.findByEmail(authentication.getName());
+
         if (post == null) {
             return ResponseEntity.notFound().build();
         }
 //            get theme
         ThemeDto themeDto = new ThemeDto();
-        themeDto.setId(post.getTheme().getId());
-        themeDto.setTitle(post.getTheme().getTitle());
-        themeDto.setCreatedAt(post.getTheme().getCreatedAt());
-        themeDto.setUpdatedAt(post.getTheme().getUpdatedAt());
+        themeDto.setId(theme.getId());
+        themeDto.setTitle(theme.getTitle());
+        themeDto.setCreatedAt(theme.getCreatedAt());
+        themeDto.setUpdatedAt(theme.getUpdatedAt());
 //        get user
         UserDto userDto = new UserDto();
-        userDto.setId(post.getUser().getId());
-        userDto.setEmail(post.getUser().getEmail());
-        userDto.setUsername(post.getUser().getUsername());
-        userDto.setAdmin(post.getUser().getAdmin());
-        userDto.setCreatedAt(post.getUser().getCreatedAt());
-        userDto.setUpdatedAt(post.getUser().getUpdatedAt());
+        userDto.setId(user.getId());
+        userDto.setEmail(user.getEmail());
+        userDto.setUsername(user.getUsername());
+        userDto.setAdmin(user.getAdmin());
+        userDto.setCreatedAt(user.getCreatedAt());
+        userDto.setUpdatedAt(user.getUpdatedAt());
 //        initialize post
         PostDto postDto = new PostDto();
         postDto.setId(post.getId());
@@ -59,17 +64,17 @@ public class PostController {
         return ResponseEntity.ok().body(postDto);
     }
 
-    @GetMapping
-    public ResponseEntity<?> getAllPosts() {
-        postService.getAllPosts();
-        return ResponseEntity.ok(new PostRequest.PostsResponse(postService.getAllPosts()));
+    @GetMapping("/theme/{themeId}")
+    public ResponseEntity<?> getAllPostsFromTheme(@PathVariable("themeId") Long themeId) {
+        postService.getAllPostsFromTheme(themeId);
+        return ResponseEntity.ok(new PostRequest.PostsResponse(postService.getAllPostsFromTheme(themeId)));
     }
 
-    @PostMapping()
-    public ResponseEntity<?> addNewPost(@Valid @RequestBody PostDto postDto) {
+    @PostMapping("/theme/{themeId}")
+    public ResponseEntity<?> addNewPost(@PathVariable("themeId") Long themeId, @Valid @RequestBody PostDto postDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findByEmail(authentication.getName());
-        this.postService.addNewPost(postDto, user);
+        this.postService.addNewPost(themeId, postDto, user);
         return ResponseEntity.ok().body(new PostRequest.MessageResponse("The post was successfully created"));
     }
 
