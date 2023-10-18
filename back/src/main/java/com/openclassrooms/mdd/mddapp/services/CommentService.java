@@ -1,14 +1,11 @@
 package com.openclassrooms.mdd.mddapp.services;
 
 import com.openclassrooms.mdd.mddapp.dto.CommentDto;
-import com.openclassrooms.mdd.mddapp.dto.PostDto;
 import com.openclassrooms.mdd.mddapp.models.Comment;
 import com.openclassrooms.mdd.mddapp.models.Post;
 import com.openclassrooms.mdd.mddapp.models.User;
-import com.openclassrooms.mdd.mddapp.payload.request.PostRequest;
 import com.openclassrooms.mdd.mddapp.repositories.CommentRepository;
 import com.openclassrooms.mdd.mddapp.repositories.PostRepository;
-import com.openclassrooms.mdd.mddapp.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
@@ -21,7 +18,6 @@ import java.util.List;
 public class CommentService {
     private final PostRepository postRepository;
     private final CommentRepository commentRepository;
-    private final UserRepository userRepository;
     public List<Comment> getAllCommentsFromPost(Long postId) {
         Post post = this.postRepository.findById(postId).orElse(null);
         if (post == null) {
