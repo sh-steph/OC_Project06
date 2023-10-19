@@ -1,0 +1,8 @@
+import { Theme } from "./theme.interface";
+import { User } from "./user.interface";
+
+export interface Subscription {
+    id: number;
+    user: User;
+    theme: Theme;
+}
