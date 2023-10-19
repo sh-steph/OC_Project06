@@ -5,6 +5,8 @@ import { AuthGuard } from './guards/auth.guard';
 import { UnauthGuard } from './guards/unauth.guard';
 import { UserDetailComponent } from './pages/user-detail/user-detail.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { LoginComponent } from './pages/authentication/login/login.component';
+import { RegisterComponent } from './pages/authentication/register/register.component';
 
 // consider a guard combined with canLoad / canActivate route option
 // to manage unauthenticated user to access private routes
@@ -24,6 +26,16 @@ const routes: Routes = [
     path: 'home',
     canActivate: [UnauthGuard],
     component: HomeComponent,
+  },
+  {
+    path: 'login',
+    canActivate: [UnauthGuard],
+    component: LoginComponent,
+  },
+  {
+    path: 'register',
+    canActivate: [UnauthGuard],
+    component: RegisterComponent,
   },
   {
     path: 'user-detail',
