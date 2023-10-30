@@ -7,6 +7,7 @@ import com.openclassrooms.mdd.mddapp.payload.response.JwtResponse;
 import com.openclassrooms.mdd.mddapp.payload.response.MessageResponse;
 import com.openclassrooms.mdd.mddapp.repositories.UserRepository;
 import com.openclassrooms.mdd.mddapp.services.JwtService;
+import com.openclassrooms.mdd.mddapp.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,17 +27,17 @@ import java.util.Optional;
 public class AuthController {
 
     private final PasswordEncoder passwordEncoder;
-    private final UserRepository userRepository;
+    private final UserService userService;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-        Optional<User> userOptional = userRepository.findByEmail(signUpRequest.getEmail());
-        if (userOptional.isPresent()) {
+        User findUser = userService.findByEmail(signUpRequest.getEmail());
+        if (findUser != null) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Error: Email is already taken!"));
+                    .body(new MessageResponse("Email is already taken!"));
         }
 
         // Create new user's account
@@ -44,7 +45,7 @@ public class AuthController {
                 signUpRequest.getUsername(),
                 passwordEncoder.encode(signUpRequest.getPassword()),
                 false);
-        userRepository.save(user);
+        userService.save(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
