@@ -14,6 +14,7 @@ import { SessionService } from 'src/app/services/session.service';
 export class LoginComponent {
   public hide = true;
   public onError = false;
+  userConnectedo = true;
 
   public form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -32,9 +33,13 @@ export class LoginComponent {
     this.authService.login(loginRequest).subscribe({
       next: (response: SessionInformation) => {
         this.sessionService.logIn(response);
-        this.router.navigate(['/login']);
+        this.router.navigate(['/postList']);
       },
       error: (error) => (this.onError = true),
     });
+  }
+
+  public buttonPreviousTab(): void {
+    this.router.navigate(['/register']); // temporaire
   }
 }
