@@ -1,0 +1,21 @@
+<app-header></app-header>
+<div class="container">
+  <div class="row justify-content-between">
+    <div class="col-2">
+      <button class="button-base base-color">
+        <p class="text-color">Create Post</p>
+      </button>
+    </div>
+    <div class="col-2" style="text-align: end;">
+      <div class="sort">
+        Sort by
+        <ng-container *ngIf="arrowBool; else downArrow">
+          <i (click)="toggleArrow()" class="bi-arrow-up"></i>
+        </ng-container>
+        <ng-template #downArrow>
+          <i (click)="toggleArrow()" class="bi-arrow-down"></i>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
