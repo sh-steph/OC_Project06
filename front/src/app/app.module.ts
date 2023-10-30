@@ -20,6 +20,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { RegisterComponent } from './pages/authentication/register/register.component';
 import { LoginComponent } from './pages/authentication/login/login.component';
+import { HeaderComponent } from './pages/header/header.component';
+import { PostListComponent } from './pages/post-list/post-list.component';
+import { ThemeListComponent } from './pages/theme-list/theme-list.component';
 
 const materialModule = [
   MatButtonModule,
@@ -38,6 +41,9 @@ const materialModule = [
     UserDetailComponent,
     RegisterComponent,
     LoginComponent,
+    HeaderComponent,
+    PostListComponent,
+    ThemeListComponent,
   ],
   imports: [
     BrowserModule,

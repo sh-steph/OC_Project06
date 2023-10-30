@@ -1,4 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/scss/bootstrap";
+// Then import Bootstrap
+@import "~bootstrap-icons/font/bootstrap-icons.css";
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.container{
+  margin: 1rem;
+}
+
+.base-color {
+  color: #7763c5;
+}
+.current-tab-header-color {
+  color: #6c5bcf;
+}
+.button-base{
+  margin: auto;
+  padding: 0.5em 4em;
+  background-color: #7763c5;
+  .text-color{
+    color: white;
+    margin: auto;
+  }
+}
+
+.bi-arrow-left{
+  font-size: 2rem;
+  color: black;
+}

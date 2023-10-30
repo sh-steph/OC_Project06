@@ -7,6 +7,8 @@ import { UserDetailComponent } from './pages/user-detail/user-detail.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { LoginComponent } from './pages/authentication/login/login.component';
 import { RegisterComponent } from './pages/authentication/register/register.component';
+import { PostListComponent } from './pages/post-list/post-list.component';
+import { ThemeListComponent } from './pages/theme-list/theme-list.component';
 
 // consider a guard combined with canLoad / canActivate route option
 // to manage unauthenticated user to access private routes
@@ -20,11 +22,11 @@ const routes: Routes = [
   {
     path: '',
     canActivate: [UnauthGuard],
-    component: HomeComponent,
+    component: LoginComponent,
   },
   {
     path: 'home',
-    canActivate: [UnauthGuard],
+    canActivate: [AuthGuard],
     component: HomeComponent,
   },
   {
@@ -36,6 +38,16 @@ const routes: Routes = [
     path: 'register',
     canActivate: [UnauthGuard],
     component: RegisterComponent,
+  },
+  {
+    path: 'postList',
+    canActivate: [AuthGuard],
+    component: PostListComponent,
+  },
+  {
+    path: 'themeList',
+    canActivate: [AuthGuard],
+    component: ThemeListComponent,
   },
   {
     path: 'user-detail',

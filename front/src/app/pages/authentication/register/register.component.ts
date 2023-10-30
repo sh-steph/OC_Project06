@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterRequest } from 'src/app/interfaces/registerRequest.interface';
@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/services/authentication/auth.service';
 })
 export class RegisterComponent {
   public onError = false;
+  messageError: String = "";
 
   public form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -31,10 +32,19 @@ export class RegisterComponent {
   ) {}
 
   public submit(): void {
+
     const registerRequest = this.form.value as RegisterRequest;
     this.authService.register(registerRequest).subscribe({
       next: (_: void) => this.router.navigate(['/login']),
-      error: (_) => (this.onError = true),
+      error: (error) => {
+        this.onError = true;
+        this.messageError = error.error.message
+        console.log(this.messageError);
+      }
     });
+  }
+
+  public buttonPreviousTab(): void {
+    this.router.navigate(['/login']); // temporaire
   }
 }
