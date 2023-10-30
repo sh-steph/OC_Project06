@@ -41,7 +41,7 @@ public class ThemeController {
     }
 
     @PostMapping()
-    public ResponseEntity<?> addNewPost(@Valid @RequestBody ThemeDto themeDto) {
+    public ResponseEntity<?> addNewTheme(@Valid @RequestBody ThemeDto themeDto) {
         this.themeService.addNewTheme(themeDto);
         return ResponseEntity.ok().body(new PostRequest.MessageResponse("The theme was successfully created"));
     }
