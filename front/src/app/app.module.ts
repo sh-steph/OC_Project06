@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LOCALE_ID } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -23,6 +24,8 @@ import { LoginComponent } from './pages/authentication/login/login.component';
 import { HeaderComponent } from './pages/header/header.component';
 import { PostListComponent } from './pages/post-list/post-list.component';
 import { ThemeListComponent } from './pages/theme-list/theme-list.component';
+import { PostCreateComponent } from './pages/form/post-create/post-create.component';
+import { PostDetailComponent } from './pages/post-list/post-detail/post-detail.component';
 
 const materialModule = [
   MatButtonModule,
@@ -44,6 +47,8 @@ const materialModule = [
     HeaderComponent,
     PostListComponent,
     ThemeListComponent,
+    PostCreateComponent,
+    PostDetailComponent,
   ],
   imports: [
     BrowserModule,

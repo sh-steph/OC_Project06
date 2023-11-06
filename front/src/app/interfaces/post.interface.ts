@@ -12,3 +12,7 @@ export interface Post {
     createdAt: string;
     updatedAt?: string;
 }
+
+export interface PostList {
+    posts: Post[];
+}

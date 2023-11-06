@@ -9,24 +9,29 @@ import { LoginComponent } from './pages/authentication/login/login.component';
 import { RegisterComponent } from './pages/authentication/register/register.component';
 import { PostListComponent } from './pages/post-list/post-list.component';
 import { ThemeListComponent } from './pages/theme-list/theme-list.component';
+import { PostCreateComponent } from './pages/form/post-create/post-create.component';
+import { PostDetailComponent } from './pages/post-list/post-detail/post-detail.component';
 
 // consider a guard combined with canLoad / canActivate route option
 // to manage unauthenticated user to access private routes
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   canActivate: [UnauthGuard],
-  //   loadChildren: () =>
-  //     import('./features/auth/auth.module').then((m) => m.AuthModule),
-  // },
   {
     path: '',
-    canActivate: [UnauthGuard],
-    component: LoginComponent,
+    children: [
+      {
+        path: '',
+        component: HomeComponent,
+      },
+      {
+        path: '',
+        component: PostListComponent,
+        canActivate: [AuthGuard],
+      },
+    ],
   },
   {
     path: 'home',
-    canActivate: [AuthGuard],
+    canActivate: [UnauthGuard],
     component: HomeComponent,
   },
   {
@@ -43,6 +48,16 @@ const routes: Routes = [
     path: 'postList',
     canActivate: [AuthGuard],
     component: PostListComponent,
+  },
+  {
+    path: 'postCreate',
+    canActivate: [AuthGuard],
+    component: PostCreateComponent,
+  },
+  {
+    path: 'postDetail/:postId',
+    canActivate: [AuthGuard],
+    component: PostDetailComponent,
   },
   {
     path: 'themeList',
@@ -62,4 +77,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {
+}
