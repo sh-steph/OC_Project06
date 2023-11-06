@@ -39,7 +39,7 @@ public class Post {
     private String title;
 
     @NonNull
-    @Size(max = 2500)
+    @Size(max = 500)
     @Column(name = "description")
     private String description;
 

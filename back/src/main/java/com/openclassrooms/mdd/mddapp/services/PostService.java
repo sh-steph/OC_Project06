@@ -26,6 +26,10 @@ public class PostService {
         return this.postRepository.findById(id).orElse(null);
     }
 
+    public List<Post> getAllPosts() {
+        return postRepository.findAll();
+    }
+
     public List<Post> getAllPostsFromTheme(Long themeId) {
         Theme theme = themeService.getThemeById(themeId);
         if (theme == null) {

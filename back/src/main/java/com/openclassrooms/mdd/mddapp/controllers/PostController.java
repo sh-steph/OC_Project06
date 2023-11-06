@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -64,11 +66,43 @@ public class PostController {
         return ResponseEntity.ok().body(postDto);
     }
 
-    @GetMapping("/theme/{themeId}")
-    public ResponseEntity<?> getAllPostsFromTheme(@PathVariable("themeId") Long themeId) {
-        postService.getAllPostsFromTheme(themeId);
-        return ResponseEntity.ok(new PostRequest.PostsResponse(postService.getAllPostsFromTheme(themeId)));
+    @GetMapping()
+    public ResponseEntity<?> getAllPosts() {
+        List<Post> posts = postService.getAllPosts();
+        List<PostDto> postDtos = new ArrayList<>();
+        posts.forEach(post -> {
+//            get theme
+            ThemeDto themeDto = new ThemeDto();
+            themeDto.setId(post.getTheme().getId());
+            themeDto.setTitle(post.getTheme().getTitle());
+            themeDto.setCreatedAt(post.getTheme().getCreatedAt());
+            themeDto.setUpdatedAt(post.getTheme().getUpdatedAt());
+//            get user
+            UserDto userDto = new UserDto();
+            userDto.setId(post.getUser().getId());
+            userDto.setUsername(post.getUser().getUsername());
+            userDto.setEmail(post.getUser().getEmail());
+            userDto.setAdmin(post.getUser().getAdmin());
+            userDto.setCreatedAt(post.getUser().getCreatedAt());
+            userDto.setUpdatedAt(post.getUser().getUpdatedAt());
+//            get post
+            PostDto postDto = new PostDto();
+            postDto.setId(post.getId());
+            postDto.setUser(userDto);
+            postDto.setTitle(post.getTitle());
+            postDto.setDescription(post.getDescription());
+            postDto.setTheme(themeDto);
+            postDto.setCreatedAt(post.getCreatedAt());
+            postDto.setUpdatedAt(post.getUpdatedAt());
+            postDtos.add(postDto);
+        });
+        return ResponseEntity.ok(new PostRequest.PostsResponse(postDtos));
     }
+//    @GetMapping("/theme/{themeId}")
+//    public ResponseEntity<?> getAllPostsFromTheme(@PathVariable("themeId") Long themeId) {
+//        postService.getAllPostsFromTheme(themeId);
+//        return ResponseEntity.ok(new PostRequest.PostsResponse(postService.getAllPostsFromTheme(themeId)));
+//    }
 
     @PostMapping("/theme/{themeId}")
     public ResponseEntity<?> addNewPost(@PathVariable("themeId") Long themeId, @Valid @RequestBody PostDto postDto) {

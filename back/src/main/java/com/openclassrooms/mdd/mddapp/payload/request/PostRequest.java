@@ -1,5 +1,6 @@
 package com.openclassrooms.mdd.mddapp.payload.request;
 
+import com.openclassrooms.mdd.mddapp.dto.PostDto;
 import com.openclassrooms.mdd.mddapp.models.Post;
 import com.openclassrooms.mdd.mddapp.models.Theme;
 import com.openclassrooms.mdd.mddapp.models.User;
@@ -32,7 +33,7 @@ public class PostRequest {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class PostsResponse {
-        private Iterable<Post> posts;
+        private Iterable<PostDto> posts;
     }
 }
 
