@@ -44,6 +44,8 @@ public class PostController {
         ThemeDto themeDto = new ThemeDto();
         themeDto.setId(theme.getId());
         themeDto.setTitle(theme.getTitle());
+        themeDto.setTitle(post.getTheme().getTitle());
+        themeDto.setDescription(post.getTheme().getDescription());
         themeDto.setCreatedAt(theme.getCreatedAt());
         themeDto.setUpdatedAt(theme.getUpdatedAt());
 //        get user
@@ -75,6 +77,7 @@ public class PostController {
             ThemeDto themeDto = new ThemeDto();
             themeDto.setId(post.getTheme().getId());
             themeDto.setTitle(post.getTheme().getTitle());
+            themeDto.setTitle(post.getTheme().getDescription());
             themeDto.setCreatedAt(post.getTheme().getCreatedAt());
             themeDto.setUpdatedAt(post.getTheme().getUpdatedAt());
 //            get user
