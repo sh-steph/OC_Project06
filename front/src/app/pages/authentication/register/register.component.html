@@ -1,31 +1,54 @@
 <app-header></app-header>
 <div class="container">
-    <div class="row">
-        <div class="col-2">
-            <i (click)="buttonPreviousTab()" class="bi-arrow-left"></i>
-          </div>
-          <div class="col-10"></div>
+  <div class="row justify-content-center">
+    <div class="button-previous">
+      <i (click)="buttonPreviousTab()" class="bi-arrow-left"></i>
+    </div>
+    <div class="col-12 text-center">
+      <h1>Inscription</h1>
+    </div>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <label>Nom d'utilisateur</label>
+        <input
+          type="text"
+          class="form-control col-12 mb-3"
+          formControlName="username"
+          required
+        />
+      </div>
     </div>
     <div class="row justify-content-center">
-        <div class="col-12 align-self-center">
-            <mat-card-header fxLayoutAlign="center center">
-                <mat-card-title>Register</mat-card-title>
-            </mat-card-header>
-            <form class="register-form" [formGroup]="form" (ngSubmit)="submit()">
-                <mat-card-content fxLayout="column">
-                    <mat-form-field fxFlex>
-                        <input matInput placeholder="Email" formControlName="email">
-                    </mat-form-field>
-                    <mat-form-field fxFlex>
-                        <input matInput placeholder="Username" formControlName="username">
-                    </mat-form-field>
-                    <mat-form-field fxFlex>
-                        <input matInput placeholder="Password" formControlName="password">
-                    </mat-form-field>
-                </mat-card-content>
-                <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Submit</button>
-                <span *ngIf="onError" class="error ml2">{{ messageError }}</span>
-            </form>
-        </div>
+      <div class="col-4">
+        <label>Adresse e-mail</label>
+        <input
+          type="text"
+          class="form-control col-12 mb-3"
+          formControlName="email"
+          required
+        />
+      </div>
     </div>
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <label>Mot de passe</label>
+        <input
+          type="password"
+          class="form-control col-12 mb-3"
+          formControlName="password"
+          required
+        />
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-2 text-center">
+        <button class="button-base" type="submit">
+          <p class="text-color">S'inscrire</p>
+        </button>
+        <span *ngIf="onError" class="error ml2">{{ messageError }}</span>
+      </div>
+    </div>
+  </form>
 </div>

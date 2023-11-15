@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable, Subject, of, takeUntil } from 'rxjs';
 import { LoginRequest } from 'src/app/interfaces/loginRequest.interface';
 import { SessionInformation } from 'src/app/interfaces/sessionInformation.interface';
 import { AuthService } from 'src/app/services/authentication/auth.service';
@@ -11,10 +12,13 @@ import { SessionService } from 'src/app/services/session.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit, OnDestroy {
+  loggedBool: Observable<boolean | null> = of(null);
+  userConnected: boolean = false;
+  private destroy = new Subject<void>();
+
   public hide = true;
   public onError = false;
-  userConnectedo = true;
 
   public form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -28,6 +32,25 @@ export class LoginComponent {
     private sessionService: SessionService
   ) {}
 
+  ngOnInit(): void {
+    this.loggedBool = this.sessionService.$isLogged();
+    this.loggedBool.pipe(takeUntil(this.destroy)).subscribe((logged) => {
+      console.log('test ', logged);
+      // wait to get data from subscribe
+      if (logged) {
+        this.userConnected = logged;
+        this.router.navigate(['/postList']);
+      } else {
+        this.userConnected = false;
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.destroy.next();
+    this.destroy.unsubscribe;
+  }
+
   public submit(): void {
     const loginRequest = this.form.value as LoginRequest;
     this.authService.login(loginRequest).subscribe({
@@ -40,6 +63,6 @@ export class LoginComponent {
   }
 
   public buttonPreviousTab(): void {
-    this.router.navigate(['/register']); // temporaire
+    this.router.navigate(['/home']);
   }
 }

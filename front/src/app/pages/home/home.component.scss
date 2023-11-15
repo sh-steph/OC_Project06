@@ -1,7 +1,11 @@
-.center {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+.button-auth {
+  margin: auto;
+  padding: 0.5em 4em;
+  border-color: black;
+  border-radius: 12px;
+  background-color: white;
+  .text-content {
+    color: black;
+    margin: auto;
+  }
 }
