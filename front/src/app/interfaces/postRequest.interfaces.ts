@@ -1,8 +1,8 @@
 export interface PostRequest {
-    title: string;
-    description: string;
+  title: string;
+  description: string;
 }
 
 export interface PostResponse {
-	message: string;
+  message: string;
 }

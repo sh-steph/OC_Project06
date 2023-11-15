@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, Subject, of, takeUntil } from 'rxjs';
-import { Post } from 'src/app/interfaces/post.interface';
-import { PostRequest, PostResponse } from 'src/app/interfaces/postRequest.interfaces';
+import {
+  PostRequest,
+  PostResponse,
+} from 'src/app/interfaces/postRequest.interfaces';
 import { ThemeList } from 'src/app/interfaces/theme.interface';
 import { PostsService } from 'src/app/services/api/posts.service';
 import { ThemesService } from 'src/app/services/api/themes.service';
@@ -28,6 +30,7 @@ export class PostCreateComponent implements OnInit {
     ],
   });
   themeSelected: String = '';
+  maxChars = 500;
 
   constructor(
     private router: Router,
@@ -52,11 +55,13 @@ export class PostCreateComponent implements OnInit {
   }
 
   public submit(): void {
-    let postRequest :PostRequest = {
-      title : this.postForm!.get('title')?.value || '',
-      description: this.postForm!.get('description')?.value || ''
+    let postRequest: PostRequest = {
+      title: this.postForm!.get('title')?.value || '',
+      description: this.postForm!.get('description')?.value || '',
     };
-    const themeId = String(this.getThemeId(this.postForm.get('theme')?.value || ''));
+    const themeId = String(
+      this.getThemeId(this.postForm.get('theme')?.value || '')
+    );
     this.postsService
       .createPost(themeId, postRequest)
       .subscribe((postResponse: PostResponse) => this.exitPage(postResponse));
@@ -74,5 +79,4 @@ export class PostCreateComponent implements OnInit {
   private exitPage(postResponse: PostResponse): void {
     this.router.navigate(['postList']);
   }
-  
 }
