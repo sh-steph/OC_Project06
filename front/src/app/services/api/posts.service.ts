@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map, find } from 'rxjs';
+import { Observable } from 'rxjs';
 import { PostList, Post } from 'src/app/interfaces/post.interface';
 import { PostRequest, PostResponse } from 'src/app/interfaces/postRequest.interfaces';
 

@@ -26,6 +26,7 @@ body {
 .button-base{
   margin: 1em auto;
   padding: 0.5em 1em;
+  width: 100%;
   background-color: #7763c5;
   border-radius: 12px;
   .text-color{
@@ -37,4 +38,24 @@ body {
 .bi-arrow-left{
   font-size: 2rem;
   color: black;
+}
+
+.line-bar {
+  height:2px;
+  border-width:0;
+  color:black;
+  background-color:black
+}
+
+// articleList themeList and userDetail
+.sort {
+  margin: 1em auto;
+  padding: 0.5em 0em;
+}
+
+.card {
+  width: 47%;
+  margin: 0.5em 0;
+  background-color: #f5f5f5;
+  border: none;
 }

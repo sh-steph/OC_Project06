@@ -12,16 +12,21 @@ import { PostsService } from 'src/app/services/api/posts.service';
   providers: [DatePipe],
 })
 export class PostListComponent implements OnInit, OnDestroy {
+  onThemeTab: boolean = false;
+  onArticleTab: boolean = false;
+  onUserTab: boolean = false;
   public getAllPosts: Observable<PostList | null> = of(null);
   private destroy = new Subject<void>();
   sortOrder: 'asc' | 'desc' = 'asc';
   arrowBool: boolean = true;
   postList: PostList = { posts: [] };
-  getPost: PostList = { posts: [] };
 
   constructor(private postsService: PostsService, private router: Router) {}
 
   ngOnInit(): void {
+    this.onArticleTab = true;
+    this.onThemeTab = false;
+    this.onUserTab = false;
     this.getAllPosts = this.postsService.getAllPost();
     this.getAllPosts.pipe(takeUntil(this.destroy)).subscribe((postsData) => {
       // wait to get data from subscribe
@@ -61,13 +66,10 @@ export class PostListComponent implements OnInit, OnDestroy {
   }
 
   postDetail(post: Post): void {
-    let getPostId = '';
-    let getThemeId = '';
-    this.getPost = { posts: [] };
-    this.getPost.posts.push(post);
-    getPostId = String(this.getPost.posts.find(p => p.id));
-    console.log(getPostId);
-    console.log(this.getPost);
-    // this.router.navigate(['/postDetail']);
+    let getPost: PostList = { posts: [] };
+    getPost.posts.push(post);
+    let getPostId = String(getPost.posts.map((post) => post.id));
+    let getThemeId = String(getPost.posts.map((post) => post.theme.id));
+    this.router.navigate(['/theme/' + getThemeId + '/postDetail/' + getPostId]);
   }
 }

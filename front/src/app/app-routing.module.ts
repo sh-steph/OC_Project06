@@ -55,7 +55,7 @@ const routes: Routes = [
     component: PostCreateComponent,
   },
   {
-    path: 'postDetail/:postId',
+    path: 'theme/:themeId/postDetail/:postId',
     canActivate: [AuthGuard],
     component: PostDetailComponent,
   },
@@ -65,7 +65,7 @@ const routes: Routes = [
     component: ThemeListComponent,
   },
   {
-    path: 'user-detail',
+    path: 'userDetail',
     canActivate: [AuthGuard],
     component: UserDetailComponent,
   },
