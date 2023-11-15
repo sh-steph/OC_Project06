@@ -1,5 +1,6 @@
 package com.openclassrooms.mdd.mddapp.payload.request;
 
+import com.openclassrooms.mdd.mddapp.dto.CommentDto;
 import com.openclassrooms.mdd.mddapp.models.Comment;
 import com.openclassrooms.mdd.mddapp.models.Post;
 import com.openclassrooms.mdd.mddapp.models.User;
@@ -33,6 +34,6 @@ public class CommentRequest {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class CommentResponse {
-        private Iterable<Comment> comments;
+        private Iterable<CommentDto> comments;
     }
 }
