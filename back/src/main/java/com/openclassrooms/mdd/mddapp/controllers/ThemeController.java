@@ -29,6 +29,7 @@ public class ThemeController {
         ThemeDto themeDto = new ThemeDto();
         themeDto.setId(theme.getId());
         themeDto.setTitle(theme.getTitle());
+        themeDto.setTitle(theme.getDescription());
         themeDto.setCreatedAt(theme.getCreatedAt());
         themeDto.setUpdatedAt(theme.getUpdatedAt());
         return ResponseEntity.ok().body(themeDto);

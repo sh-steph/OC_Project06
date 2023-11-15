@@ -15,6 +15,8 @@ public class ThemeDto {
 
     private String title;
 
+    private String description;
+
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;

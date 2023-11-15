@@ -71,3 +71,6 @@ VALUES (1, 1);
 
 INSERT INTO COMMENTS (user_id, post_id, comment, created_at)
 VALUES (1, 1, 'Still below Jordan at his prime', '2023-09-21 10:53:09');
+
+ALTER TABLE THEMES
+ADD COLUMN description TEXT;

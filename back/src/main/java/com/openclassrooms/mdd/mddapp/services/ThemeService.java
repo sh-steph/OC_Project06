@@ -26,6 +26,7 @@ public class ThemeService {
     public void addNewTheme(ThemeDto themeDto) {
         Theme theme = new Theme();
         theme.setTitle(themeDto.getTitle());
+        theme.setDescription(themeDto.getDescription());
         theme.setCreatedAt(LocalDateTime.now());
         theme.setUpdatedAt(null);
         this.themeRepository.save(theme);
