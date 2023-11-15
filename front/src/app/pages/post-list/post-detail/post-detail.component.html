@@ -1,0 +1,54 @@
+<app-header></app-header>
+<div class="container">
+  <div class="row">
+    <div class="col-1">
+      <i (click)="buttonPreviousTab()" class="bi-arrow-left"></i>
+    </div>
+    <div class="col-11">
+      <div class="row">
+        <h1 class="col-12 mb-4">{{ postObject[0].title }}</h1>
+        <h4 class="col-2 mb-4">
+          {{ postObject[0].createdAt | date : "dd/MM/yyyy" }}
+        </h4>
+        <h4 class="col-2 mb-4">{{ postObject[0].user.username }}</h4>
+        <h4 class="col-8 mb-4">{{ postObject[0].theme.title }}</h4>
+        <div class="col-12 mb-4">
+          {{ postObject[0].description }}
+        </div>
+      </div>
+      <hr class="mb-4 line-bar" />
+      <div class="row">
+        <div class="col-2 mb-4 text-end">Commentaires</div>
+      </div>
+      <div
+        class="row"
+        *ngFor="let comment of sortCommentsByDate(commentList.comments)"
+      >
+        <div class="col-2 text-end">{{ comment.user.username }}</div>
+        <div class="col-9 mb-4 comment-bloc">
+          {{ comment.comment }}
+        </div>
+      </div>
+      <form
+        [formGroup]="commentForm"
+        (ngSubmit)="submitComment(postObject[0].id, postObject[0].theme.id)"
+      >
+        <div class="row">
+          <textarea
+            class="col-10 offset-1 comment-textarea"
+            #myTextArea
+            [maxlength]="maxChars"
+            formControlName="comment"
+            required
+          ></textarea>
+          <button class="col-1 bi-send" type="submit"></button>
+        </div>
+        <div class="row">
+          <div class="col-10 offset-1 text-end mb-3">
+            {{ myTextArea.value.length }} /{{ maxChars }}
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
