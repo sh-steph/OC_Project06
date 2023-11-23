@@ -63,7 +63,6 @@ export class PostDetailComponent implements OnInit, OnDestroy {
         this.postObject.push(postsData);
       }
     });
-    console.log('post obj ', this.postObject);
   }
 
   getAllComments(postId: string) {
