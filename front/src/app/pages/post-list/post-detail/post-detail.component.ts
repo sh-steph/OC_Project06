@@ -66,7 +66,6 @@ export class PostDetailComponent implements OnInit, OnDestroy {
   }
 
   getAllComments(postId: string) {
-    console.log(postId);
     this.getCommentList = this.commentsService.getAllComments(postId);
     this.getCommentList
       .pipe(takeUntil(this.destroy))

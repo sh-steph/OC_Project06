@@ -35,8 +35,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loggedBool = this.sessionService.$isLogged();
     this.loggedBool.pipe(takeUntil(this.destroy)).subscribe((logged) => {
-      console.log('test ', logged);
-      // wait to get data from subscribe
       if (logged) {
         this.userConnected = logged;
         this.router.navigate(['/postList']);
