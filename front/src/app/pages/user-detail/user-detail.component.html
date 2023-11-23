@@ -1,35 +1,77 @@
-<div class="m3">
-  <mat-card>
-    <mat-card-title>
-      <div fxLayout="row" fxLayoutAlign="start center">
-        <button mat-icon-button (click)="back()">
-          <mat-icon>arrow_back</mat-icon>
+<app-header></app-header>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12 text-center">
+      <div class="title-text">Profil utilisateur</div>
+    </div>
+  </div>
+  <form [formGroup]="userDetailForm" (ngSubmit)="saveUpdate()">
+    <div class="row justify-content-center">
+      <div class="col-9 col-md-4">
+        <input
+          type="text"
+          class="form-control col-12 mb-3"
+          formControlName="username"
+          placeholder="Username"
+          required
+        />
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-9 col-md-4">
+        <input
+          type="text"
+          class="form-control col-12 mb-3"
+          formControlName="email"
+          placeholder="Email"
+          required
+        />
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-4 col-md-2 text-center">
+        <button class="button-base" type="submit">
+          <p class="text-color">Sauvegarder</p>
         </button>
-        <h1>User information</h1>
       </div>
-    </mat-card-title>
-    <mat-card-content>
-      <div *ngIf="user" fxLayout="column" fxLayoutAlign="start center">
-        <p>Name: {{ user.username }}</p>
-        <p>Email: {{ user.email }}</p>
-        <p *ngIf="user.admin" class="my2">You are admin</p>
-        <div
-          *ngIf="!user.admin"
-          fxLayout="column"
-          class="my2"
-          fxLayoutAlign="center center"
-        >
-          <p>Delete my account:</p>
-          <button mat-raised-button color="warn" (click)="delete()">
-            <mat-icon>delete</mat-icon>
-            <span class="ml1">Detail</span>
-          </button>
-        </div>
-        <div fxLayoutAlign="space-between center" class="p2 w100">
-          <p><i>Create at: </i> {{ user.createdAt | date : "longDate" }}</p>
-          <p><i>Last update: </i> {{ user.updatedAt | date : "longDate" }}</p>
+    </div>
+  </form>
+  <div class="row justify-content-center">
+    <div class="col-4 col-md-2 text-center">
+      <button class="disconnect-button">
+        <p (click)="disconnect()" class="disconnect-text">Se déconnecter</p>
+      </button>
+    </div>
+  </div>
+  <hr class="mb-4 line-bar" />
+  <div class="row justify-content-center">
+    <div class="col-12 text-center">
+      <div class="title-text">Abonnements</div>
+    </div>
+    <div class="row justify-content-between">
+      <div
+        class="col-12 col-md-6 custom-card"
+        *ngFor="let theme of sortThemesByAlphabetical(subscribedList.themes)"
+      >
+        <h2 class="card-title col-12">{{ theme.title }}</h2>
+        <p class="card-text">
+          {{
+            theme.description.length > 250
+              ? theme.description.slice(0, 250) + "..."
+              : theme.description
+          }}
+        </p>
+        <div class="row justify-content-center">
+          <div class="col-5">
+            <button
+              class="button-base base-color text-center"
+              (click)="unSubscribeButton(theme.id)"
+            >
+              <p class="text-color">Se désabonner</p>
+            </button>
+          </div>
         </div>
       </div>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 </div>

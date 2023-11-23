@@ -6,3 +6,15 @@ export interface Subscription {
     user: User;
     theme: Theme;
 }
+
+export interface SubscriptionList {
+    subscriptions: Subscription[];
+}
+
+export interface SubscriptionRequest {
+    message: String;
+}
+
+export interface SubscriptionResponse {
+    message: String;
+}
