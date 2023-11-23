@@ -1,12 +1,12 @@
 <app-header></app-header>
 <div class="container">
-  <div class="row justify-content-between">
-    <div class="col-3">
+  <div class="row row-custom">
+    <div class="col-7 col-md-3">
       <button class="button-base base-color" (click)="buttonCreatePost()">
         <p class="text-color">Créer un article</p>
       </button>
     </div>
-    <div class="col-2" style="text-align: end;">
+    <div class="col-7 col-md-2 text-align">
       <div class="sort">
         Sort by
         <ng-container *ngIf="arrowBool; else downArrow">
@@ -19,14 +19,23 @@
     </div>
   </div>
   <div class="row justify-content-between">
-    <div class="col-6 card" *ngFor="let post of sortPostsByDate(postList.posts)">
+    <div
+      class="col-12 col-md-6 custom-card"
+      *ngFor="let post of sortPostsByDate(postList.posts)"
+    >
       <div (click)="postDetail(post)" class="card-body">
         <h2 class="card-title">{{ post.title }}</h2>
         <div class="row">
-          <h4 class="col-6 mb-2">{{ post.createdAt | date: 'dd/MM/yyyy'}}</h4>
-          <h4 class="col-6 mb-2">{{ post.user.username}}</h4>
+          <h4 class="col-6 mb-2">{{ post.createdAt | date : "dd/MM/yyyy" }}</h4>
+          <h4 class="col-6 mb-2">{{ post.user.username }}</h4>
         </div>
-        <p class="card-text">{{ post.description.length > 250 ? post.description.slice(0, 250) + '...' : post.description }}</p>
+        <p class="card-text">
+          {{
+            post.description.length > 250
+              ? post.description.slice(0, 250) + "..."
+              : post.description
+          }}
+        </p>
       </div>
     </div>
   </div>
