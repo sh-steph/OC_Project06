@@ -1,0 +1,15 @@
+@media (max-width: 768px) {
+  app-header {
+    display: none;
+  }
+}
+
+.custom-image {
+  display: none;
+  @media (max-width: 768px) {
+    display: block;
+    margin: auto;
+    height: 100%;
+    width: 80%;
+  }
+}

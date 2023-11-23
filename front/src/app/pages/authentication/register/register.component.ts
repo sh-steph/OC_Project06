@@ -43,8 +43,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.loggedBool = this.sessionService.$isLogged();
     this.loggedBool
     .subscribe((logged) => {
-      console.log(logged);
-        // wait to get data from subscribe
         if (logged) {
           this.userConnected = logged;
           this.router.navigate(['/postList']);
