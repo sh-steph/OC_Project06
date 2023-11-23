@@ -1,5 +1,6 @@
 package com.openclassrooms.mdd.mddapp.payload.request;
 
+import com.openclassrooms.mdd.mddapp.dto.SubscriptionDto;
 import com.openclassrooms.mdd.mddapp.models.Subscription;
 import com.openclassrooms.mdd.mddapp.models.Theme;
 import com.openclassrooms.mdd.mddapp.models.User;
@@ -25,7 +26,7 @@ public class SubscriptionRequest {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class SubscriptionResponse {
-        private Iterable<Subscription> subscriptions;
+        private Iterable<SubscriptionDto> subscriptions;
     }
 }
 
