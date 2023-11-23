@@ -2,20 +2,26 @@
 <div class="container">
   <div class="row justify-content-between">
     <div
-      class="col-6 card"
+      class="col-12 col-md-6 custom-card"
       *ngFor="let theme of sortThemesByAlphabetical(themeList.themes)"
     >
       <div class="row justify-content-center">
         <h2 class="card-title col-12">{{ theme.title }}</h2>
-        <p class="card-text">{{ theme.description.length > 250 ? theme.description.slice(0, 250) + '...' : theme.description }}</p>
+        <p class="card-text">
+          {{
+            theme.description.length > 250
+              ? theme.description.slice(0, 250) + "..."
+              : theme.description
+          }}
+        </p>
         <div class="col-5">
-            <button
-          class="button-base base-color text-center"
-          (click)="subscribeButton()"
-        >
-          <p class="text-color">S'abonner</p>
-        </button>
-        </div>  
+          <button
+            class="button-base base-color text-center"
+            (click)="subscribeButton(theme.id)"
+          >
+            <p class="text-color">S'abonner</p>
+          </button>
+        </div>
       </div>
     </div>
   </div>
