@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LOCALE_ID } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';

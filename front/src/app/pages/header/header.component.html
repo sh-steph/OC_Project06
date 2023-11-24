@@ -1,44 +1,39 @@
 <div class="row">
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-
-    <div class="col-4">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="col-2">
       <div (click)="buttonMDD()">
         <img class="mdd-header" src="../../../assets/logo_p6.png" />
       </div>
     </div>
-    <div class="col-8">
-        <div>
-          <button
-            class="navbar-toggler mobile-toggle-button"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
+    <div *ngIf="userConnected">
+      <div class="col-md-10">
+        <div class="collapse navbar-collapse nav-content" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a
+                (click)="postTab()"
+                [ngClass]="{ 'nav-link': true, active: onPostTab }"
+                >Articles</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                (click)="themeTab()"
+                [ngClass]="{ 'nav-link': true, active: onThemeTab }"
+                >Themes</a
+              >
+            </li>
+            <li class="nav-item">
+              <a (click)="userDetailTab()" class="nav-link">
+                <i
+                  [ngClass]="{ 'bi-person': true, active: onUserDetailTab }"
+                ></i>
+              </a>
+            </li>
+          </ul>
         </div>
-        <div *ngIf="userConnected">
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item active">
-                <a class="nav-link" href="#"
-                  >Post</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Theme</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><i class="bi-person"></i></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-  
+      </div>
+      <div type="button" class="col-10 col-md-0 navbar-toggler-icon mobile-toggle-button" (click)="collapseMenu()"></div>
     </div>
- 
-</nav>
+  </nav>
 </div>

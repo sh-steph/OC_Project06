@@ -15,7 +15,33 @@
 
 .bi-person{
   background-color: lightgrey;
-  font-size: 2em;
+  font-size: 1.5em;
   border-radius: 100%;
-  padding: 0.15em;
+  padding: 0 0.15em;
+}
+
+.nav-link.active {
+  color: #7763c5;
+}
+
+.text-default {
+  color: black;
+}
+
+.bi-person.active {
+  border-color: #7763c5;
+  border-style: solid;
+  color: #7763c5;
+}
+
+.nav-content {
+  justify-content: end;
+  margin-right: 2em;
+}
+
+.navbar-toggler-icon{
+  border: none;
+  background-color: none;
+  color: black;
+  margin-right: 2em;
 }
