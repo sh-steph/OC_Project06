@@ -19,7 +19,7 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User userFind = userRepository.findByEmail(email)
+        User userFind = userRepository.findByEmailOrUsername(email)
                 .orElseThrow(() -> new UsernameNotFoundException(email));
         return new User(
                 userFind.getId(),
@@ -43,7 +43,7 @@ public class UserService implements UserDetailsService {
         return this.userRepository.findById(id).orElse(null);
     }
     public User findByEmail(String email) throws UsernameNotFoundException {
-        return userRepository.findByEmail(email)
+        return userRepository.findByEmailOrUsername(email)
                 .orElseThrow(() -> new UsernameNotFoundException(email));
     }
 
