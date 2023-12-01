@@ -119,7 +119,7 @@ Une fois le back-end mise à disposition, pouvoir être capable d'exploiter les 
 <details>
   <summary>English</summary>
 
-# Projet Monde de Dév (MDD)
+# Project Monde de Dév (MDD)
 
 This project was developed as part of a training course in which the student had to develop the entire application (front-end and back-end) using Angular and Springboot.
 
