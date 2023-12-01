@@ -26,7 +26,7 @@ Une fois l'installation complète, executer la commande `npm start` pour exécut
 
 ## Kanban
 
-<img src='/ressources/images/kanban.png' width='500'/>
+<img src='/resources/images/kanban.png' width='500'/>
 
 Suite à une lecture des spécifications, chaque **issue** (ticket) correspond à une fonctionnalité de l'application et donc à une branche qui lui est spécifique dont le premier numéro du ticket correspond à une partie de l'application.
 
@@ -34,7 +34,7 @@ Bien entendu, le nombre de tickets dépendent du développement en question et d
 
 Ce qui résulte à l'historique suivant à travers les différents commit détaillant brièvement les modifications apportées.
 
-<img src='/ressources/images/branch-git.png' width='500'/>
+<img src='/resources/images/branch-git.png' width='500'/>
 
 </details>
 
@@ -64,7 +64,7 @@ Dans le cadre du projet, l'étudiant doit mettre en place une base de données p
 
 Vous trouverez l'ensemble des API dans un fichier `postman` se trouvant à la racine du projet dans le dossier `/ressources/postman`.
 
-<img src='/ressources/images/postman.png' width='500'/>
+<img src='/resources/images/postman.png' width='500'/>
 
 Le choix des url pour les API ont été conçues en essayant de prendre en compte le projet sur le long terme afin d'obtenir les informations voulues en ayant le temps de réponse le plus court possible.
 
