@@ -61,16 +61,16 @@ INSERT INTO USERS (email, admin, username, password, created_at)
 VALUES ('admin@mdd.com', true, 'Admin', '$2a$10$.Hsa/ZjUVaHqi0tp9xieMeewrnZxrZ5pQRzddUXE/WjDu2ZThe6Iq', '2023-09-08 09:53:09');
 
 INSERT INTO THEMES (title, created_at)
-VALUES ('Basket Ball', '2023-09-21 09:53:09');
+VALUES ('Développement web', '2023-09-21 09:53:09');
 
 INSERT INTO POSTS (theme_id, user_id, title, description, created_at)
-VALUES (1, 1, 'The amazing Stephen Curry', 'Unstopable shooter description', '2023-09-21 09:53:09');
+VALUES (1, 1, 'Par où débuter dans le développement web ?', 'Bonjour, je souhaite suivre un cursurs dans le développement mais je ne sais pas par où commencer au vue du nombre de technologies existant.', '2023-09-21 09:53:09');
 
 INSERT INTO SUBSCRIPTIONS (theme_id, user_id)
 VALUES (1, 1);
 
 INSERT INTO COMMENTS (user_id, post_id, comment, created_at)
-VALUES (1, 1, 'Still below Jordan at his prime', '2023-09-21 10:53:09');
+VALUES (1, 1, 'Bonjour, il est préférable pour tout développeur de commencer par des exercices sur les algorithmes afin de travailler sur ta reflexion à résoudre un problème et de te familiariser dans cet environnement avant de te lancer sur les technologies en question', '2023-09-21 10:53:09');
 
 ALTER TABLE THEMES
 ADD COLUMN description TEXT;
