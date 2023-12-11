@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Subject, of, takeUntil } from 'rxjs';
-import { SessionService } from 'src/app/services/session.service';
+import { Observable, Subject, of } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -13,29 +12,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   userConnected: boolean = false;
   private destroy = new Subject<void>();
 
-  constructor(
-    private router: Router,
-    private sessionService: SessionService
-  ) {}
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {
-    this.loggedBool = this.sessionService.$isLogged();
-    this.loggedBool
-    .pipe(takeUntil(this.destroy))
-    .subscribe((logged) => {
-        // wait to get data from subscribe
-        if (logged) {
-          this.userConnected = logged;
-          this.router.navigate(['/postList']);
-        } else {
-          this.userConnected = false;
-        }
-      });
-  }
+  ngOnInit(): void {}
 
   ngOnDestroy() {
-    this.destroy.next()
-    this.destroy.unsubscribe
+    this.destroy.next();
+    this.destroy.unsubscribe;
   }
 
   login() {
