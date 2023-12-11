@@ -18,6 +18,8 @@
           <button
             class="button-base base-color text-center"
             (click)="subscribeButton(theme.id)"
+            [disabled]="isThemeSubscribed(theme.id)"
+            [ngClass]="{ 'disabled-button': isThemeSubscribed(theme.id) }"
           >
             <p class="text-color">S'abonner</p>
           </button>
