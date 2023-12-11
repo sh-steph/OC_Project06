@@ -35,7 +35,7 @@ public class PostController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Post post = this.postService.getPostById(Long.valueOf(id));
         Theme theme = themeService.getThemeById(themeId);
-        User user = userService.findByEmail(authentication.getName());
+        User user = userService.findByUsername(authentication.getName());
 
         if (post == null) {
             return ResponseEntity.notFound().build();
@@ -101,16 +101,11 @@ public class PostController {
         });
         return ResponseEntity.ok(new PostRequest.PostsResponse(postDtos));
     }
-//    @GetMapping("/theme/{themeId}")
-//    public ResponseEntity<?> getAllPostsFromTheme(@PathVariable("themeId") Long themeId) {
-//        postService.getAllPostsFromTheme(themeId);
-//        return ResponseEntity.ok(new PostRequest.PostsResponse(postService.getAllPostsFromTheme(themeId)));
-//    }
 
     @PostMapping("/theme/{themeId}")
     public ResponseEntity<?> addNewPost(@PathVariable("themeId") Long themeId, @Valid @RequestBody PostDto postDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findByEmail(authentication.getName());
+        User user = userService.findByUsername(authentication.getName());
         this.postService.addNewPost(themeId, postDto, user);
         return ResponseEntity.ok().body(new PostRequest.MessageResponse("The post was successfully created"));
     }
