@@ -15,6 +15,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSidenavModule } from '@angular/material/sidenav';
+
+import { SidebarModule } from 'primeng/sidebar';
+import { ButtonModule } from 'primeng/button';
+import { TabViewModule } from 'primeng/tabview';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
@@ -33,7 +38,10 @@ const materialModule = [
   MatSnackBarModule,
   MatToolbarModule,
   MatFormFieldModule,
+  MatSidenavModule,
 ];
+
+const primeNgModule = [SidebarModule, ButtonModule, TabViewModule];
 
 @NgModule({
   declarations: [
@@ -56,6 +64,7 @@ const materialModule = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ...primeNgModule,
     ...materialModule,
   ],
   providers: [

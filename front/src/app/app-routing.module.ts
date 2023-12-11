@@ -20,6 +20,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
+        canActivate: [UnauthGuard],
         component: HomeComponent,
       },
       {
@@ -77,5 +78,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}

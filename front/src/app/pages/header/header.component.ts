@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Subject, of, takeUntil } from 'rxjs';
-import { SessionService } from 'src/app/services/session.service';
+import { Subject } from 'rxjs';
+import { MatSidenav } from '@angular/material/sidenav';
+import { AuthService } from 'src/app/services/authentication/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,6 @@ import { SessionService } from 'src/app/services/session.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  loggedBool: Observable<boolean | null> = of(null);
   userConnected: boolean = false;
   onPostTab: boolean = false;
   onThemeTab: boolean = false;
@@ -17,23 +17,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private destroy = new Subject<void>();
 
   isCollapse = false;
+  sidenav?: MatSidenav;
+  sidenavWidth = 200;
+  visibleSidebar2: boolean = false;
 
   constructor(
     private router: Router,
-    private sessionService: SessionService,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private authservice: AuthService
   ) {}
 
   ngOnInit(): void {
-    this.loggedBool = this.sessionService.$isLogged();
-    this.loggedBool.pipe(takeUntil(this.destroy)).subscribe((logged) => {
-      // wait to get data from subscribe
-      if (logged) {
-        this.userConnected = logged;
-      } else {
-        this.userConnected = false;
-      }
-    });
+    this.userConnected = this.authservice.isLoggedIn();
     this.setTabsBasedOnUrl();
   }
 
@@ -51,7 +46,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   public buttonMDD(): void {
-    if (this.loggedBool) {
+    if (!this.userConnected) {
       this.router.navigate(['/register']);
     } else {
       this.router.navigate(['/postList']);
@@ -81,5 +76,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   collapseMenu(): void {
     this.isCollapse = !this.isCollapse;
+    // Ouvrir ou fermer le sidenav en fonction de l'état isCollapse
+    if (this.isCollapse && this.sidenav) {
+      this.sidenav.open();
+    } else {
+      this.sidenav?.close();
+    }
   }
 }
