@@ -41,6 +41,27 @@
           formControlName="password"
           required
         />
+        <!-- Messages d'erreur pour les conditions du mot de passe -->
+        <div
+          *ngIf="
+            form.get('password')?.hasError('passwordCondition') &&
+            form.get('password')?.dirty
+          "
+          class="error-message"
+        >
+          <div *ngIf="form.get('password')?.hasError('lowercase')">
+            Il manque une lettre minuscule.
+          </div>
+          <div *ngIf="form.get('password')?.hasError('uppercase')">
+            Il manque une lettre majuscule.
+          </div>
+          <div *ngIf="form.get('password')?.hasError('digit')">
+            Il manque un chiffre.
+          </div>
+          <div *ngIf="form.get('password')?.hasError('specialChar')">
+            Il manque un caractère spécial.
+          </div>
+        </div>
       </div>
     </div>
     <div class="row justify-content-center">
