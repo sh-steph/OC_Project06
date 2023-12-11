@@ -1,16 +1,19 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable, Subject, of, takeUntil } from 'rxjs';
-import { SessionInformation } from 'src/app/interfaces/sessionInformation.interface';
-import { SubscriptionList, SubscriptionResponse } from 'src/app/interfaces/subscription.interface';
+import {
+  SubscriptionList,
+  SubscriptionResponse,
+} from 'src/app/interfaces/subscription.interface';
 import { Theme, ThemeList } from 'src/app/interfaces/theme.interface';
-import { User } from 'src/app/interfaces/user.interface';
+import {
+  UserDetail,
+  UserDetailResponse,
+} from 'src/app/interfaces/userDetail.interface';
 import { SubscriptionsService } from 'src/app/services/api/subscriptions.service';
-import { ThemesService } from 'src/app/services/api/themes.service';
+import { UserDetailService } from 'src/app/services/api/userDetail.service';
 import { SessionService } from 'src/app/services/session.service';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-user-detail',
@@ -30,20 +33,35 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 
   userDetailForm = this.fb.group({
     username: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.min(3), Validators.max(50)]],
+    email: [
+      '',
+      [
+        Validators.required,
+        Validators.min(3),
+        Validators.max(50),
+        Validators.email,
+      ],
+    ],
   });
 
   constructor(
-    private router: Router,
     private fb: FormBuilder,
-    private themesService: ThemesService,
-    private subscriptionsService: SubscriptionsService
+    private subscriptionsService: SubscriptionsService,
+    private sessionService: SessionService,
+    private userDetailService: UserDetailService
   ) {}
 
   ngOnInit(): void {
     this.onArticleTab = false;
     this.onThemeTab = false;
     this.onUserTab = true;
+    // auto remplissage du formulaire
+    if (this.sessionService.sessionInformation != null) {
+      this.userDetailForm.patchValue({
+        username: this.sessionService.sessionInformation.username,
+        email: this.sessionService.sessionInformation.email,
+      });
+    }
     this.mySubscribedList();
   }
 
@@ -71,16 +89,28 @@ export class UserDetailComponent implements OnInit, OnDestroy {
     return themes.slice().sort((a, b) => a.title.localeCompare(b.title));
   }
 
-  saveUpdate(): void {}
+  saveUpdate(): void {
+    let userDetailForm: UserDetail = {
+      username: this.userDetailForm!.get('username')?.value || '',
+      email: this.userDetailForm!.get('email')?.value || '',
+    };
+    this.userDetailService
+      .updateUsernameAndEmail(userDetailForm)
+      .subscribe((userDetailResponse: UserDetailResponse) => {});
+  }
 
   disconnect(): void {
-    this.router.navigate(['home']);
+    localStorage.clear();
+    location.reload();
   }
 
   unSubscribeButton(id: number): void {
     const themeId = String(id);
     this.subscriptionsService
-    .removeSubscription(themeId)
-    .subscribe((subscriptionResponse: SubscriptionResponse) => subscriptionResponse)
+      .removeSubscription(themeId)
+      .subscribe((subscriptionResponse: SubscriptionResponse) => {
+        subscriptionResponse;
+        location.reload();
+      });
   }
 }
