@@ -40,8 +40,8 @@ public class SubscriptionService {
 
     public List<Subscription> getAllSubscriptionsFromUserId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findByEmail(authentication.getName());
-        if (user.getId() == null) {
+        User user = userService.findByUsername(authentication.getName());
+        if (user == null) {
             throw new NotFoundException("the user id is missing");
         } else {
             return subscriptionRepository.findByUser_Id(user.getId());
