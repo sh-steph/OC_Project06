@@ -6,14 +6,40 @@
     </div>
     <div class="col-11">
       <div class="row">
-        <div class="col-12 mb-4 title-text">{{ postObject[0].title }}</div>
+        <div class="col-12 mb-4 title-text">
+          {{
+            postObject && postObject.length > 0
+              ? postObject[0].title
+              : "Erreur lors du chargement"
+          }}
+        </div>
         <h4 class="col-6 col-md-2 mb-4">
-          {{ postObject[0].createdAt | date : "dd/MM/yyyy" }}
+          {{
+            postObject && postObject.length > 0
+              ? (postObject[0].createdAt | date : "dd/MM/yyyy")
+              : "Erreur lors du chargement"
+          }}
         </h4>
-        <h4 class="col-6 col-md-2 mb-4">{{ postObject[0].user.username }}</h4>
-        <h4 class="col-12 col-md-8 mb-4">{{ postObject[0].theme.title }}</h4>
+        <h4 class="col-6 col-md-2 mb-4">
+          {{
+            postObject && postObject.length > 0
+              ? postObject[0].user.username
+              : "Erreur lors du chargement"
+          }}
+        </h4>
+        <h4 class="col-12 col-md-8 mb-4">
+          {{
+            postObject && postObject.length > 0
+              ? postObject[0].theme.title
+              : "Erreur lors du chargement"
+          }}
+        </h4>
         <div class="col-12 mb-4">
-          {{ postObject[0].description }}
+          {{
+            postObject && postObject.length > 0
+              ? postObject[0].description
+              : "Erreur lors du chargement"
+          }}
         </div>
       </div>
       <hr class="mb-4 line-bar" />

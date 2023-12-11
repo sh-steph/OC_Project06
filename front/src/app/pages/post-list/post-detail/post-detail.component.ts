@@ -104,15 +104,10 @@ export class PostDetailComponent implements OnInit, OnDestroy {
       comment: this.commentForm!.get('comment')?.value || '',
     };
     const getpostId = String(postId);
-    const getThemeId = String(themeId);
     this.commentsService
       .createComment(getpostId, commentRequest)
-      .subscribe((commentResponse: CommentResponse) =>
-        this.refreshPage(getThemeId, getpostId)
-      );
-  }
-
-  refreshPage(themeId: string, postId: string): void {
-    this.router.navigate(['/theme/' + themeId + '/postDetail/' + postId]);
+      .subscribe((commentResponse: CommentResponse) => {
+        location.reload();
+      });
   }
 }
