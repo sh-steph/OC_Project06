@@ -54,6 +54,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.authService.login(loginRequest).subscribe({
       next: (response: SessionInformation) => {
         this.sessionService.logIn(response);
+        localStorage.setItem('Bearer', response.token);
         this.router.navigate(['/postList']);
       },
       error: (error) => (this.onError = true),
