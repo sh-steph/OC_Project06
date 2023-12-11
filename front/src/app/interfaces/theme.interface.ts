@@ -1,19 +1,19 @@
 export interface Theme {
-    id: number;
-    title: string;
-    description: string;
-    createdAt: string;
-    updatedAt?: string;
+  id: number;
+  title: string;
+  description: string;
+  createdAt: string;
+  updatedAt?: string;
 }
 
 export interface ThemeList {
-    themes: Theme[];
+  themes: Theme[];
 }
 
 export interface ThemeRequest {
-    message: String;
+  message: String;
 }
 
 export interface ThemeResponse {
-    message: String;
+  message: String;
 }

@@ -24,8 +24,4 @@ export class PostsService {
   public createPost(idTheme: string, postRequest: PostRequest): Observable<PostResponse> {
     return this.httpClient.post<PostResponse>(`${this.pathService}/theme/${idTheme}`, postRequest);
   }
-
-  /* public update(id: string, form: FormData): Observable<RentalResponse> {
-    return this.httpClient.put<RentalResponse>(`${this.pathService}/${id}`, form);
-  } */
 }
