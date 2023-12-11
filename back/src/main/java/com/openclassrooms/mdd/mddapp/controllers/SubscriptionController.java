@@ -181,7 +181,7 @@ public class SubscriptionController {
                     .body(new MessageResponse("You are already subscribed to this theme"));
         } else {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            User user = userService.findByEmail(authentication.getName());
+            User user = userService.findByUsername(authentication.getName());
             this.subscriptionService.addNewSubscriptionToTheme(themeId, user);
             return ResponseEntity.ok().body(new PostRequest.MessageResponse("The subscription was successfully created"));
         }
@@ -190,7 +190,7 @@ public class SubscriptionController {
     @DeleteMapping("/theme/{themeId}")
     public ResponseEntity<?> removeSubscriptionByThemeId(@PathVariable("themeId") Long themeId) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findByEmail(authentication.getName());
+        User user = userService.findByUsername(authentication.getName());
             this.subscriptionService.removeSubscriptionByThemeId(themeId, user);
             return ResponseEntity.ok().body(new SubscriptionRequest.MessageResponse("The unsubscription was successfully done"));
         }
