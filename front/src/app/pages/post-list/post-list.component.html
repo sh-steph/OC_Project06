@@ -10,10 +10,10 @@
       <div class="sort">
         Sort by
         <ng-container *ngIf="arrowBool; else downArrow">
-          <i (click)="toggleArrow()" class="bi-arrow-up"></i>
+          <i (click)="toggleArrow()" class="bi-arrow-down"></i>
         </ng-container>
         <ng-template #downArrow>
-          <i (click)="toggleArrow()" class="bi-arrow-down"></i>
+          <i (click)="toggleArrow()" class="bi-arrow-up"></i>
         </ng-template>
       </div>
     </div>
