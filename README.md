@@ -7,7 +7,7 @@ Ce projet a été développé dans le cadre d'une formation où l'étudiant doit
 
 Le but du projet est développer un **MVP (Minimal Viable Product)** qui est une version fonctionnelle et élémentaire du produit ayant pour but de présenter sa version la plus basique aux consommateurs pour l’améliorer petit à petit.
 
-Le projet **MDD** est réseau social dédié aux développeurs permettant de les aider à trouver un travail via la mise en relation entre les développeurs et donc les aider à élargir leurs réseaux professionnels mais également à contruire une espace communautaire.
+Le projet **MDD** est réseau social dédié aux développeurs permettant de les aider à trouver un travail via la mise en relation entre les développeurs et donc les aider à élargir leurs réseaux professionnels mais également à construire une espace communautaire.
 
 ## Par où commencer ?
 
