@@ -45,7 +45,6 @@ public class User implements UserDetails {
 
 
     @NonNull
-    @Size(max = 100)
     private String password;
 
     @NonNull

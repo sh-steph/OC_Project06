@@ -33,11 +33,11 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-        User findUser = userService.findByEmail(signUpRequest.getEmail());
+        User findUser = userService.findByEmailOrUsername(signUpRequest.getEmail(), signUpRequest.getUsername());
         if (findUser != null) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Email is already taken!"));
+                    .body(new MessageResponse("Email or Username is already taken!"));
         }
 
         // Create new user's account
