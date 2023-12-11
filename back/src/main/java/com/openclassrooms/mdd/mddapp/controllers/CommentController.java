@@ -18,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -81,7 +82,7 @@ public class CommentController {
     @PostMapping("/post/{postId}")
     public ResponseEntity<?> addNewCommentFromPost(@PathVariable("postId") Long postId, @Valid @RequestBody CommentDto commentDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findByEmail(authentication.getName());
+        User user = (User) authentication.getPrincipal();
         if (commentDto == null) {
             return ResponseEntity
                     .badRequest()
