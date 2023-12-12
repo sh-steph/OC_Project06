@@ -1,15 +1,22 @@
 package com.openclassrooms.mdd.mddapp.controllers;
 
+import com.openclassrooms.mdd.mddapp.dto.CommentDto;
+import com.openclassrooms.mdd.mddapp.dto.UserDto;
 import com.openclassrooms.mdd.mddapp.mapper.UserMapper;
 import com.openclassrooms.mdd.mddapp.models.User;
+import com.openclassrooms.mdd.mddapp.payload.request.CommentRequest;
+import com.openclassrooms.mdd.mddapp.payload.request.UserRequest;
+import com.openclassrooms.mdd.mddapp.payload.response.MessageResponse;
 import com.openclassrooms.mdd.mddapp.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Objects;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -20,40 +27,17 @@ public class UserController {
     private final UserMapper userMapper;
     private final UserService userService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable("id") String id) {
-        try {
-            User user = this.userService.findById(Long.valueOf(id));
-
-            if (user == null) {
-                return ResponseEntity.notFound().build();
-            }
-
-            return ResponseEntity.ok().body(this.userMapper.toDto(user));
-        } catch (NumberFormatException e) {
-            return ResponseEntity.badRequest().build();
-        }
-    }
-
-    @DeleteMapping("{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") String id) {
-        try {
-            User user = this.userService.findById(Long.valueOf(id));
-
-            if (user == null) {
-                return ResponseEntity.notFound().build();
-            }
-
-            UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-            if(!Objects.equals(userDetails.getUsername(), user.getEmail())) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-            }
-
-            this.userService.delete(Long.parseLong(id));
-            return ResponseEntity.ok().build();
-        } catch (NumberFormatException e) {
-            return ResponseEntity.badRequest().build();
+    @PutMapping()
+    public ResponseEntity<?> updateUsernameAndEmail(@Valid @RequestBody UserDto userDto) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+        if (userDto == null) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Bad request comment"));
+        } else {
+            this.userService.updateUsernameAndEmail(user, userDto);
+            return ResponseEntity.ok().body(new UserRequest.MessageResponse("The user was successfully updated"));
         }
     }
 }
