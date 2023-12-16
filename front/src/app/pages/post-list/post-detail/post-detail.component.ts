@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subject, of, takeUntil } from 'rxjs';
+import { Observable, Subject, catchError, of, takeUntil, EMPTY } from 'rxjs';
 import {
   CommentList,
   CommentRequest,
@@ -57,7 +57,14 @@ export class PostDetailComponent implements OnInit, OnDestroy {
 
   getPostDetail(themeId: string, postId: string) {
     this.getPost = this.postsService.getPostById(postId, themeId);
-    this.getPost.pipe(takeUntil(this.destroy)).subscribe((postsData) => {
+    this.getPost.pipe(
+      takeUntil(this.destroy),
+      catchError((error) => {
+        this.router.navigate(['/postList']);
+        return EMPTY;
+      })
+    )
+    .subscribe((postsData) => {
       // wait to get data from subscribe
       if (postsData) {
         this.postObject.push(postsData);

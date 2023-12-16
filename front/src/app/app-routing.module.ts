@@ -70,8 +70,10 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     component: UserDetailComponent,
   },
-  { path: '404', component: NotFoundComponent },
-  { path: '**', redirectTo: '404' },
+  {
+    path: '**',
+    redirectTo: 'postList'
+  },
 ];
 
 @NgModule({

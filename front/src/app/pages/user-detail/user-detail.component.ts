@@ -96,7 +96,10 @@ export class UserDetailComponent implements OnInit, OnDestroy {
     };
     this.userDetailService
       .updateUsernameAndEmail(userDetailForm)
-      .subscribe((userDetailResponse: UserDetailResponse) => {});
+      .subscribe((userDetailResponse: UserDetailResponse) => {
+        localStorage.clear();
+        location.reload();
+      });
   }
 
   disconnect(): void {
