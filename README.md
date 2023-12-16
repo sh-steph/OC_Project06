@@ -92,6 +92,10 @@ Dans le cadre du projet, l'étudiant doit développer l'ensemble du front-end en
 
 - `PrimeNG` pour sa simplicité de la mise en place du `side bar` et de son usage intuitif répondant au besoin du projet.
 
+### Format web et mobile
+
+En plus de la responsivité de la version web, l'ensemble du front de l'application a été développé en suivant les maquettes imposées ayant sur chaque page un visuel en format web, mais également en format mobile pour la clarté du projet ayant pour but d'optimiser l'expérience utilisateur sur n'importe quel appareil.
+
 ## Résumé
 
 Étant un **MVP**, le but est de développer une application en partant d'aucune base où le développeur doit mettre en place un back-end sécurisé à l'aide de `Spring security` pour accéder et enrichir la base de données à l'aide des différents API à mettre à disposition afin d'établir l'interconnexion entre le front-end et le back-end.
@@ -209,6 +213,10 @@ As part of the project, the student must develop the entire front-end following 
 - `Bootstrap` is one of the best visual libraries in the development ecosystem, thanks to its popularity with the developer community, its flexibility in terms of customization and layout, and its compatibility with the majority of existing browsers.
 
 - `PrimeNG` for the simplicity of setting up the `side bar` and its intuitive use, in line with the project's needs.
+
+### Web and Mobile Format
+
+In addition to the responsiveness of the web version, the entire front end of the application has been developed following the imposed mockups, featuring a visual layout for each page in both web and mobile formats. This was done to enhance project clarity and optimize the user experience on any device.
 
 ## Summary
 
